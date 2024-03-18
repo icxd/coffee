@@ -98,10 +98,6 @@ stmt_t *p_parse_stmt(parser_t *p) {
         stmt->type = S_DECL;
         stmt->decl = decl;
     } else {
-        usz error_count2 = p->errors.count;
-        usz token_index2 = p->lexer->pos;
-        span_t token_span2 = p->token.span;
-
         while (p->errors.count > error_count) {
             error_t error = da_pop(&p->errors);
             free(error.msg);
@@ -111,13 +107,6 @@ stmt_t *p_parse_stmt(parser_t *p) {
 
         expr_t *expr = p_parse_expr(p);
         if (expr == NULL) {
-            while (p->errors.count > error_count2) {
-                error_t error = da_pop(&p->errors);
-                free(error.msg);
-            }
-            p->lexer->pos = token_index2;
-            p->token.span = token_span2;
-
             p_error(p, "expected a statement, but got `%s` instead",
                     tt_name(p->token.type));
             return NULL;
