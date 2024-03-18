@@ -1,0 +1,9 @@
+[project]
+name = "coffee"
+version = "0.1.0"
+author = ""
+compiler = "gcc"
+additional_flags = [ "-Wall", "-Werror", "-pedantic", "-std=c2x", "-g", "-O2", "-DLOG_USE_COLOR", "-Wno-stringop-truncation", "-Wno-stringop-overflow" ]
+include_dirs = ["include"]
+
+[dependencies]
